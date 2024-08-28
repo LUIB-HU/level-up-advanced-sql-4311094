@@ -2,7 +2,7 @@
 --SELECT * FROM customer LIMIT 10;
 --SELECT * FROM model LIMIT 10;
 --SELECT * FROM inventory LIMIT 10;
---SELECT * FROM sales LIMIT 10;
+--SELECT * FROM sales order by solddate desc;
 
 /*
 select 
@@ -52,4 +52,29 @@ LEFT join customer cst
   on sls.customerId = cst.customerId
 WHERE cst.customerId is NULL
 ;
+
+select emp.employeeId,emp.firstName, emp.lastName, count(*) NumberOfCarsSold
+from sales sls
+inner join employee emp
+  on sls.employeeid=emp.employeeid
+group by emp.employeeId
+order by NumberOfCarsSold DESC
+;
+
+select emp.firstName, emp.lastName, max(sls.salesAmount),min(sls.salesAmount) 
+from sales sls
+INNER join employee emp
+  on sls.employeeId=emp.employeeId
+--where sls.soldDate >= year(2023-01-01)
+group by sls.employeeId
+order by sls.employeeId
+;
 */
+select emp.employeeId,emp.firstName, emp.lastName, count(*) NumberOfCarsSold
+from sales sls
+inner join employee emp
+  on sls.employeeid=emp.employeeid
+group by emp.employeeId
+having NumberOfCarsSold>=5
+order by NumberOfCarsSold DESC
+;
