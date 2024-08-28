@@ -75,6 +75,6 @@ from sales sls
 inner join employee emp
   on sls.employeeid=emp.employeeid
 group by emp.employeeId
-having NumberOfCarsSold>=5
+having count(*)>5
 order by NumberOfCarsSold DESC
 ;
